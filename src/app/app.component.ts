@@ -29,8 +29,9 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage }
+      { title: '新增消费', component: HelloIonicPage },
+      { title: '本月账单', component: HelloIonicPage },
+      { title: '流水分析', component: ListPage }
     ];
   }
 
