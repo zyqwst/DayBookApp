@@ -1,0 +1,27 @@
+page-add-bill {
+	.showamount{
+		background:#3e425b;
+		padding:1em;
+		p{
+		color:#FFF;
+		}
+		p.show_p{
+			font-size:0.7em;
+		}
+		p.amount{
+			font-size:1.8em;
+			margin:0;
+			display:block;
+			margin-left:-0.2em;
+			font-weight:bold;
+		}
+		p.deposit{
+			font-size:0.7em
+		}
+
+	}
+	.button{
+		width:99%;
+	}
+	
+}
