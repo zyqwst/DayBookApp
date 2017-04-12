@@ -37,7 +37,9 @@
       <ion-col col-12>
         <ion-list>
           <button ion-item *ngFor="let item of items" class="">
-           <ion-icon name="{{item.icon}}" style="font-size:1.8em;"  item-left></ion-icon>
+           <ion-avatar item-left>
+           <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
+           </ion-avatar>
             <div >
               <p class="item_title">{{item.title}}</p>
               <p class="item_time">&nbsp;</p>
