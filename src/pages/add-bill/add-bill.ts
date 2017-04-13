@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
+import { HttpService } from '../../providers/http-service';
 
 @Component({
   selector: 'page-add-bill',
-  templateUrl: 'add-bill.html'
+  templateUrl: 'add-bill.html',
+	providers:[HttpService]
 })
 export class AddBillPage {
-	icons: string[];
+
+		icons: string[];
   	items: Array<{title: string, amount: string,time:string, icon: string}>;
 
-  	constructor() {
+  	constructor(private httpService : HttpService
+								) {
+			
 	    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
 	    'american-football', 'boat', 'bluetooth', 'build'];
 
@@ -21,5 +26,8 @@ export class AddBillPage {
 	        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
 	      });
 	     }
- 	}
+ 		}
+		myclick(event) {
+			
+		}
 }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>记一笔账</ion-title>
@@ -24,7 +24,7 @@
   <ion-grid>
     <ion-row class="add_row">
       <ion-col col-6 offset-3>
-        <button ion-button color="danger" icon-left class="add_btn">
+        <button ion-button color="danger" icon-left class="add_btn" (click)="myclick($event)">
         <ion-icon name="add" ></ion-icon>
           记一笔账
         </button>
