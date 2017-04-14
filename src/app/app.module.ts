@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { AddBillPage } from '../pages/add-bill/add-bill';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,6 +21,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    JsonpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../../providers/http-service';
+import { BookService } from '../../service/BookService';
+import { HttpService } from '../../providers/http-service'; 
 
 @Component({
   selector: 'page-add-bill',
   templateUrl: 'add-bill.html',
-	providers:[HttpService]
+	providers:[BookService,HttpService]
 })
 export class AddBillPage {
 
 		icons: string[];
   	items: Array<{title: string, amount: string,time:string, icon: string}>;
 
-  	constructor(private httpService : HttpService
+  	constructor(private bookService : BookService
 								) {
 			
 	    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
@@ -28,6 +29,6 @@ export class AddBillPage {
 	     }
  		}
 		myclick(event) {
-			
+			this.bookService.findAll();
 		}
 }
