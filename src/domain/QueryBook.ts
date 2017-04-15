@@ -4,6 +4,7 @@ export class QueryBook{
                 public name     :string,
                 public credate  :string,
                 public val      :number,
-                public orderby  :number
+                public orderby  :number,
+                public icon     :string
                 ){}
 }

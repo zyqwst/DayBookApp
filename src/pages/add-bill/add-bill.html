@@ -13,18 +13,21 @@
     <p class="show_p">
       本月支出（元）
     </p>
-    <p class="amount">
-        ￥3680.45
-        <ion-icon></ion-icon>
-    </p>
+    <ion-item>
+      <p class="amount">￥{{amount | number :'.2-2'}}</p>
+      <ion-icon name="happy" *ngIf="amount<=3500" style="color:#fff" item-right></ion-icon>
+      <ion-icon name="sad" *ngIf="amount>3500" style="color:#fff" item-right></ion-icon>
+    </ion-item>
     <p class="deposit">
-      本月冻结 <span> ——</span>
+      本月剩余 <span>{{4000-amount | number:'.2-2'}} <ion-icon style="color:red" *ngIf="amount>3500" name="flash">&nbsp;</ion-icon></span>
     </p>
+  
+    
   </div>
   <ion-grid>
     <ion-row class="add_row">
       <ion-col col-6 offset-3>
-        <button ion-button color="danger" icon-left class="add_btn" (click)="myclick($event)">
+        <button ion-button color="danger" icon-left class="add_btn" (click)="addBill()">
         <ion-icon name="add" ></ion-icon>
           记一笔账
         </button>
@@ -33,20 +36,21 @@
     <ion-row>
       
     </ion-row>
+
     <ion-row class="list_row">
       <ion-col col-12>
         <ion-list>
-          <button ion-item *ngFor="let item of items" class="">
+          <button ion-item *ngFor="let item of books_today" class="">
            <ion-avatar item-left>
            <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
            </ion-avatar>
             <div >
-              <p class="item_title">{{item.title}}</p>
+              <p class="item_title">{{item.name}}</p>
               <p class="item_time">&nbsp;</p>
             </div>
             <div class="item_right" item-right>
-              <p class="item_amount">{{item.amount}}</p>
-              <p class="item_time">消费时间：{{item.time}}</p>
+              <p class="item_amount">{{item.val | number:'.2-2'}}</p>
+              <p class="item_time">消费时间：{{item.credate | date:"MM-dd HH:mm"}}</p>
             </div>
           </button>
         </ion-list>

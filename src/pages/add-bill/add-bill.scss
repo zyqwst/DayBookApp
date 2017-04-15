@@ -2,6 +2,15 @@ page-add-bill {
 	.showamount{
 		background:#3e425b;
 		padding:1em;
+		ion-item{
+			background:transparent;
+			border:0;
+			padding:0;
+			margin:0;
+			height:1em;
+			line-height: 1em;
+			
+		}
 		p{
 		color:#FFF;
 		}
@@ -18,7 +27,7 @@ page-add-bill {
 		p.deposit{
 			font-size:0.7em
 		}
-
+		
 	}
 
 	.add_row{

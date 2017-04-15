@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 @Component({
+  selector: 'app',
   templateUrl: 'app.html'
 })
 export class MyApp {
@@ -29,7 +30,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: '记一笔账', component: AddBillPage },
+      { title: '记一笔', component: AddBillPage },
       { title: '本月账单', component: AddBillPage },
       { title: '流水分析', component: ListPage }
     ];

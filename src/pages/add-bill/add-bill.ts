@@ -1,34 +1,46 @@
 import { Component } from '@angular/core';
 import { BookService } from '../../service/BookService';
 import { HttpService } from '../../providers/http-service'; 
-
+import { QueryBook } from '../../domain/QueryBook';
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-add-bill',
   templateUrl: 'add-bill.html',
-	providers:[BookService,HttpService]
+	providers:[BookService,HttpService,]
 })
+/**首页面 */
 export class AddBillPage {
 
 		icons: string[];
-  	items: Array<{title: string, amount: string,time:string, icon: string}>;
-
-  	constructor(private bookService : BookService
+		books_today:QueryBook[];
+		amount:number;
+  	constructor(private bookService : BookService,
+	  			public loadingCtrl: LoadingController
 								) {
 			
 	    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
 	    'american-football', 'boat', 'bluetooth', 'build'];
-
-	    this.items = [];
-	    for(let i = 1; i < 4; i++) {
-	      this.items.push({
-	        title: '零食小吃 ' + i,
-	        amount:  "￥"+i+".00元",
-	        time:'09:15',
-	        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-	      });
-	     }
  		}
-		myclick(event) {
+		ngOnInit(){
+			let loader = this.loadingCtrl.create({
+				content:"loading...",
+				dismissOnPageChange:true, // 是否在切换页面之后关闭loading框 
+				showBackdrop:false //是否显示遮罩层
+
+			});
+			loader.present();
+
+			Promise.all([this.bookService.findToday(),this.bookService.getCurMonthAmount()])
+			.then(results =>{
+				this.books_today = results[0].object.results;
+				this.amount = results[1].object;
+				loader.dismiss();
+			})
+			.catch();
+			
+		
+		}
+		addBill() {
 			this.bookService.findAll();
 		}
 }

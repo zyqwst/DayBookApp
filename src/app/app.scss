@@ -14,3 +14,19 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+app{ 
+    .bg{ 
+        position: absolute;
+        bottom: 0;
+        right:10px;
+        width: 60px;
+        bottom:0;
+       
+    }
+    .avator{
+        width:6em;
+        height:6em;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}

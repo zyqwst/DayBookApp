@@ -6,11 +6,11 @@ import { AddBillPage } from '../pages/add-bill/add-bill';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { HttpModule, JsonpModule } from '@angular/http';
-
+import { HttpService } from '../providers/http-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { DatePipe} from '@angular/common';
 @NgModule({
   declarations: [
     MyApp,
@@ -34,6 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    DatePipe,
+    HttpService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
