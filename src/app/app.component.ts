@@ -4,6 +4,7 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { AddBillPage } from '../pages/add-bill/add-bill';
 import { ListPage } from '../pages/list/list';
+import {SaveBillPage} from '../pages/save-bill/save-bill'; 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,11 +16,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   // make AddBill the root (or first) page
   rootPage = AddBillPage;
   pages: Array<{title: string, component: any}>;
-
+  hiddenPages: Array<{title: string, component: any}>;
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -30,11 +30,15 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: '记一笔', component: AddBillPage },
+      { title: '首页', component: AddBillPage },
+      { title: '记一笔',component:SaveBillPage},
       { title: '本月账单', component: AddBillPage },
       { title: '流水分析', component: ListPage }
     ];
+   
   }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -51,4 +55,5 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
+ 
 }
