@@ -9,20 +9,22 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>日期</ion-label>
-        <ion-datetime displayFormat="MM-DD HH:mm" pickerFormat="MM-DD HH:mm" [(ngModel)]="defaultDate"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>类型</ion-label>
-         <ion-select okText="确定" cancelText="取消">
-          <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
-         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>金额</ion-label>
-        <ion-input type="number"></ion-input>
-      </ion-item>
-    </ion-list>
+
+    <form [formGroup]="book" (ngSubmit)="logForm()">
+        <ion-item>
+            <ion-label>日期</ion-label>
+            <ion-datetime displayFormat="M月D日" pickerFormat="M D" [(ngModel)]="defaultDate"  formControlName="credate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>类型</ion-label>
+          <ion-select okText="确定" cancelText="取消" formControlName="typeid">
+            <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>金额</ion-label>
+            <ion-input type="number" formControlName="val"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" [disabled]="!todo.valid" color="danger" block>保&nbsp;存</button>
+    </form>
 </ion-content>
