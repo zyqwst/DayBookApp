@@ -4,7 +4,6 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { AddBillPage } from '../pages/add-bill/add-bill';
 import { ListPage } from '../pages/list/list';
-import {SaveBillPage} from '../pages/save-bill/save-bill'; 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,8 +29,7 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: '首页', component: AddBillPage },
-      { title: '记一笔',component:SaveBillPage},
+      { title: '记一笔', component: AddBillPage },
       { title: '本月账单', component: AddBillPage },
       { title: '流水分析', component: ListPage }
     ];

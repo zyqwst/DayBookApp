@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
+import { NavController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
 import { BookService } from '../../service/BookService';
 import { HttpService } from '../../providers/http-service'; 
 import { QueryBook } from '../../domain/QueryBook';
-
+import { SaveBillPage} from '../../pages/save-bill/save-bill'
 @Component({
   selector: 'page-add-bill',
   templateUrl: 'add-bill.html',
@@ -16,9 +17,9 @@ export class AddBillPage {
 		icons: string[];
 		books_today:QueryBook[];
 		amount:number;
-  	constructor(private bookService : BookService,
-	  			public loadingCtrl: LoadingController
-								) {
+  	constructor(public bookService : BookService,
+	  			public loadingCtrl: LoadingController,
+				public navCtrl: NavController				) {
 			
 	    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
 	    'american-football', 'boat', 'bluetooth', 'build'];
@@ -32,7 +33,7 @@ export class AddBillPage {
 				spinner:"dots",
 				content:"loading...",
 				dismissOnPageChange:true, // 是否在切换页面之后关闭loading框 
-				//showBackdrop:false //是否显示遮罩层
+				showBackdrop:false //是否显示遮罩层
 			});
 			loader.present();
 
@@ -43,10 +44,10 @@ export class AddBillPage {
 				loader.dismiss();
 			})
 			.catch(
-				error =>alert(error)
+				error =>console.log(error)
 			);	
 		}
 		addBill() {
-			
+			this.navCtrl.push(SaveBillPage);
 		}
 }
