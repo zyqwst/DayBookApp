@@ -12,7 +12,6 @@ import {SaveBillPage} from '../pages/save-bill/save-bill';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePipe} from '@angular/common';
-
 @NgModule({
   declarations: [
     MyApp,

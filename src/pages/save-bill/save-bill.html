@@ -3,9 +3,26 @@
     <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>记一笔账</ion-title>
+    <ion-title>
+      记一笔
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-
+    <ion-list>
+      <ion-item>
+        <ion-label>日期</ion-label>
+        <ion-datetime displayFormat="MM-DD HH:mm" pickerFormat="MM-DD HH:mm" [(ngModel)]="defaultDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>类型</ion-label>
+         <ion-select okText="确定" cancelText="取消">
+          <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>金额</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+    </ion-list>
 </ion-content>
