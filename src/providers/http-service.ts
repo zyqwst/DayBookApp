@@ -8,7 +8,7 @@ import { RestEntity } from '../domain/RestEntity';
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://192.168.1.103:8080";
+    hostUrl:string = "http://192.168.1.102:8080";
     constructor(
         private http: Http
         ) {
@@ -21,7 +21,7 @@ export class HttpService {
         headers.append('Authorization',   'username-password');
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.get(url).toPromise()
+        return this.http.get(url,options).toPromise()
             .then(res => res.json() as RestEntity)
             .catch(err => {
                 this.handleError(err);
@@ -39,12 +39,13 @@ export class HttpService {
                 this.handleError(err);
             });
     }
-     /**带身份验证的post请求 */
-    public httpPostNoAuth(url: string, body: any) {
+     /**不带身份验证的post请求 */
+    public httpPostNoAuth(url: string, body: any) :Promise<RestEntity>{
+          url = `${this.hostUrl}/${url}`;
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, body, options).toPromise()
+        return this.http.post(url, body,options).toPromise()
             .then(res => res.json())
             .catch(err => {
                 this.handleError(err);

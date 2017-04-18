@@ -50,4 +50,8 @@ export class AddBillPage {
 		addBill() {
 			this.navCtrl.push(SaveBillPage);
 		}
+		doRefresh(event){
+			this.init();
+			event.complete();
+		}
 }

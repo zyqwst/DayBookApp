@@ -9,6 +9,14 @@
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="下拉刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在刷新...">
+      </ion-refresher-content>
+    </ion-refresher>
   <div class="showamount">
     <p class="show_p">
       本月支出（元）
@@ -57,5 +65,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+  
 </ion-content>

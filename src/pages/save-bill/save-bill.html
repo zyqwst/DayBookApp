@@ -10,10 +10,10 @@
 </ion-header>
 <ion-content>
 
-    <form [formGroup]="book" (ngSubmit)="logForm()">
+    <form [formGroup]="bookForm" (ngSubmit)="logForm()">
         <ion-item>
             <ion-label>日期</ion-label>
-            <ion-datetime displayFormat="M月D日" pickerFormat="M D" [(ngModel)]="defaultDate"  formControlName="credate"></ion-datetime>
+            <ion-datetime displayFormat="MM月DD日" pickerFormat="MM DD" formControlName="credate"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>类型</ion-label>
@@ -25,6 +25,6 @@
             <ion-label>金额</ion-label>
             <ion-input type="number" formControlName="val"></ion-input>
         </ion-item>
-        <button ion-button type="submit" [disabled]="!todo.valid" color="danger" block>保&nbsp;存</button>
+        <button ion-button type="submit" color="danger" block>保&nbsp;存</button>
     </form>
 </ion-content>

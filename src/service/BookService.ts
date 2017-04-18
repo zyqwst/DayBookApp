@@ -17,6 +17,9 @@ export class BookService{
     public getCurMonthAmount(){
         var date = new Date();
         var str = this.datePipe.transform(date, 'yyyy-MM');
-         return this.httpService.httpGetWithAuth(`book/month/?yearAndMonth=${str}`);
+         return this.httpService.httpGetWithAuth(`book/month?yearAndMonth=${str}`);
+    }
+    public saveBook(body:any){
+        return this.httpService.httpPostNoAuth(`book/save`,body);
     }
 }
