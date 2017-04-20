@@ -26,7 +26,7 @@ export class AddBillPage {
  		}
 		
 		ngOnInit(){
-			// this.init();
+			this.init();
 		}
 		init(){
 			let loader = this.loadingCtrl.create({
