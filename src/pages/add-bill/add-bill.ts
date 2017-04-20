@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController,NavController } from 'ionic-angular';
 
 import { BookService } from '../../service/BookService';
 import { HttpService } from '../../providers/http-service'; 
@@ -26,6 +25,7 @@ export class AddBillPage {
  		}
 		
 		ngOnInit(){
+			this.navCtrl;
 			this.init();
 		}
 		init(){
