@@ -11,6 +11,7 @@ import { HttpService } from '../providers/http-service';
 import { BookService } from '../service/BookService';
 import { SaveBillPage} from '../pages/save-bill/save-bill'; 
 import { SearchBill} from '../pages/search-bill/search-bill';
+import { ResultsBill } from '../pages/results-bill/results-bill';
 import { StorageService} from '../service/StorageService';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,7 +24,8 @@ import { DatePipe} from '@angular/common';
     ItemDetailsPage,
     ListPage,
     SaveBillPage,
-    SearchBill
+    SearchBill,
+    ResultsBill
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { DatePipe} from '@angular/common';
     ItemDetailsPage,
     ListPage,
     SaveBillPage,
-    SearchBill
+    SearchBill,
+    ResultsBill
   ],
   providers: [
     StatusBar,

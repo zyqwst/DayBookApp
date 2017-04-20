@@ -58,7 +58,7 @@ export class SearchBill {
     let data:QueryBook[];
     this.bookService.findPage({key:"credate_between",value:this.credate_between},
     {key:"credate_betweenand",value:this.credate_betweenand},
-     {key:"typeid_and",value:this.typeid_and+"_LONG"})
+     {key:"typeid_and",value:(this.typeid_and===undefined ?"":this.typeid_and+"_LONG")})
     .then(restEntity =>{
       this.loader.dismiss();
       if(restEntity.status==-1){
@@ -66,7 +66,8 @@ export class SearchBill {
           }else{
             this.loader.dismiss();
             data = restEntity.object.results;
-            this.navCtrl.push(ResultsBill,data);
+            console.log(data);
+            this.navCtrl.push(ResultsBill,{data:data});
           }
     })
     .catch(
