@@ -18,18 +18,27 @@
       </ion-refresher-content>
     </ion-refresher>
   <div class="showamount">
-    <p class="show_p">
-      本月支出（元）
-    </p>
-    <ion-item>
-      <p class="amount">￥{{amount | number :'.2-2'}}</p>
-      <ion-icon name="happy" *ngIf="amount<=3500" style="color:#fff" item-right></ion-icon>
-      <ion-icon name="sad" *ngIf="amount>3500" style="color:#fff" item-right></ion-icon>
-    </ion-item>
+    <ion-grid>
+      <ion-row>
+          <p class="show_p">
+          本月支出（元）
+          </p>
+      </ion-row>
+      <ion-row>
+          <ion-col col-11>
+            <p class="amount">￥{{amount | number :'.2-2'}}</p>
+          </ion-col>
+          <ion-col col-1>
+            <ion-icon name="happy" *ngIf="amount<=3500" class="icon_mood"></ion-icon>
+            <ion-icon name="sad" *ngIf="amount>3500" class="icon_mood"></ion-icon>
+          </ion-col>
+      </ion-row>
+    <ion-row>
     <p class="deposit">
       本月剩余 <span>{{4000-amount | number:'.2-2'}} <ion-icon style="color:red" *ngIf="amount>3500" name="flash">&nbsp;</ion-icon></span>
     </p>
-  
+    </ion-row>
+  </ion-grid>
     
   </div>
   <ion-grid>

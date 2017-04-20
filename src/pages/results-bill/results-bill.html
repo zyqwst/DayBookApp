@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      月账单
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="list_row">
+      <ion-col col-12>
+        <ion-list>
+          <button ion-item *ngFor="let item of data" class="">
+           <ion-avatar item-left>
+           <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
+           </ion-avatar>
+            <div >
+              <p class="item_title">{{item.name}}</p>
+              <p class="item_time">&nbsp;</p>
+            </div>
+            <div class="item_right" item-right>
+              <p class="item_amount">{{item.val | number:'.2-2'}}</p>
+              <p class="item_time">消费时间：{{item.credate | date:"MM-dd HH:mm"}}</p>
+            </div>
+          </button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

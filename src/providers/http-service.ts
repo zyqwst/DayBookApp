@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions } from '@angular/http';
+import { LoadingController,Loading } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 
 import { RestEntity } from '../domain/RestEntity';
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://192.168.1.1:9971";
+    hostUrl:string = "http://192.168.1.105:9971";
     constructor(
-        private http: Http
+        private http: Http,
+        public loadingCtrl: LoadingController 
         ) {
         //this.local = new Storage(LocalStorage);
     }
@@ -56,5 +58,15 @@ export class HttpService {
     private handleError(error: Response) {
         console.log("请求错误"+error);
         return Observable.throw(error.json().error || 'Server Error');
+    }
+
+    public loading():Loading{
+       let loader = this.loadingCtrl.create({
+				spinner:"dots",
+				content:"loading...",
+				dismissOnPageChange:true, // 是否在切换页面之后关闭loading框 
+				showBackdrop:false //是否显示遮罩层
+			});
+        return loader;
     }
 }

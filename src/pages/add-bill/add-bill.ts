@@ -9,8 +9,7 @@ import { QueryBook } from '../../domain/QueryBook';
 import { SaveBillPage} from '../../pages/save-bill/save-bill'
 @Component({
   selector: 'page-add-bill',
-  templateUrl: 'add-bill.html',
-	providers:[BookService,HttpService,]
+  templateUrl: 'add-bill.html'
 })
 /**首页面 */
 export class AddBillPage {
@@ -18,6 +17,7 @@ export class AddBillPage {
 		books_today:QueryBook[];
 		amount:number;
   	constructor(public bookService : BookService,
+	  			public httpService : HttpService,
 	  			public loadingCtrl: LoadingController,
 				public navCtrl: NavController				) {
 			
@@ -29,12 +29,7 @@ export class AddBillPage {
 			this.init();
 		}
 		init(){
-			let loader = this.loadingCtrl.create({
-				spinner:"dots",
-				content:"loading...",
-				dismissOnPageChange:true, // 是否在切换页面之后关闭loading框 
-				showBackdrop:false //是否显示遮罩层
-			});
+			let loader = this.httpService.loading();
 			loader.present();
 
 			Promise.all([this.bookService.findToday(),this.bookService.getCurMonthAmount()])

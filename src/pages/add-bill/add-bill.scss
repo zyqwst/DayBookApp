@@ -16,18 +16,34 @@ page-add-bill {
 		}
 		p.show_p{
 			font-size:0.7em;
+			margin:0;
+			padding:.2em 0;
 		}
 		p.amount{
-			font-size:1.8em;
+			font-size:2.4em;
 			margin:0;
-			display:block;
-			margin-left:-0.2em;
+			padding:0;
+			margin-left:-0.4em;
 			font-weight:bold;
 		}
 		p.deposit{
+			margin:0;
+			padding:.2em 0;
 			font-size:0.7em
 		}
-		
+		ion-row{
+			padding-top:0;
+			padding-bottom: 0;
+			ion-col{
+				padding-top:0;
+				padding-bottom: 0;
+			}
+			.icon_mood{
+				color:#fff;
+				font-size: 2em;
+				margin-top:0.4em
+			}
+		}
 	}
 
 	.add_row{

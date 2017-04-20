@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      月账单
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+
+<ion-content>
+   <ion-list>
+        <ion-item>
+            <ion-label>日期</ion-label>
+            <ion-datetime displayFormat="MM月DD日" pickerFormat="MM DD" [(ngModel)]="credate_between"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>至</ion-label>
+            <ion-datetime displayFormat="MM月DD日" pickerFormat="MM DD" [(ngModel)]="credate_betweenand"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>类型</ion-label>
+          <ion-select okText="确定" cancelText="取消" [(ngModel)]="typeid_and">
+            <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <button ion-button color="danger" block (click)="query()">查&nbsp;询</button>
+    </ion-list>
+</ion-content>

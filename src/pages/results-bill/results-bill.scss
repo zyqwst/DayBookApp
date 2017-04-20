@@ -1,0 +1,29 @@
+page-results-bill {
+    .list_row{
+		*{
+			color:#555;
+		}
+
+		button{
+			padding-left:0;
+		}
+		.item_right p{
+			text-align:right;
+		}
+		ion-icon{
+			color: #f53d3d;
+		}
+		.item_title{
+			font-size:0.9em;
+			font-weight:bold;
+		}
+		.item_amount{
+			font-weight:bold;
+			font-size:0.9em;
+		}
+		.item_time{
+			color:#999;
+			font-size:0.7em;
+		}
+	}
+}
