@@ -24,7 +24,7 @@ export class SearchBill {
               private datePipe :DatePipe,
               private alertCtrl: AlertController) {
   }
-
+  
   ionViewDidLoad() {
     this.init();
   }
@@ -55,6 +55,7 @@ export class SearchBill {
   credate_betweenand:string = this.str;
   typeid_and:number;
   query(){
+    this.loader.present();
     let data:QueryBook[];
     this.bookService.findPage({key:"credate_between",value:this.credate_between},
     {key:"credate_betweenand",value:this.credate_betweenand},

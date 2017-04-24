@@ -12,16 +12,13 @@ import { SaveBillPage} from '../../pages/save-bill/save-bill'
 })
 /**首页面 */
 export class AddBillPage {
-		icons: string[];
 		books_today:QueryBook[];
 		amount:number;
   	constructor(public bookService : BookService,
 	  			public httpService : HttpService,
 	  			public loadingCtrl: LoadingController,
 				public navCtrl: NavController				) {
-			
-	    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-	    'american-football', 'boat', 'bluetooth', 'build'];
+		
  		}
 		
 		ngOnInit(){

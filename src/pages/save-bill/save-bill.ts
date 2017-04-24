@@ -7,7 +7,6 @@ import { HttpService } from '../../providers/http-service';
 import { BookService } from '../../service/BookService';
 import { Dictionary } from '../../domain/Dictionary';
 import { Constants } from '../../utils/Constant';
-import { Book } from '../../domain/Book';
 
 import { StorageService} from '../../service/StorageService';
 import {Validators, FormBuilder,FormGroup } from '@angular/forms';

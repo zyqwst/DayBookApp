@@ -50,12 +50,10 @@ export class MyApp {
         let activeVC = this.nav.getActive();
         let page = activeVC.instance;
         //当前页面非tab栏
-        if (!(page instanceof AddBillPage)) {
           if (!this.nav.canGoBack()) {
             return this.showExit();
           }
           return this.nav.pop();
-        }
       }, 101);
     });
   }
