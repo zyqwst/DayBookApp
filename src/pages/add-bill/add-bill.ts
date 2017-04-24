@@ -14,6 +14,7 @@ import { SaveBillPage} from '../../pages/save-bill/save-bill'
 export class AddBillPage {
 		books_today:QueryBook[];
 		amount:number;
+		amount_today:number;
   	constructor(public bookService : BookService,
 	  			public httpService : HttpService,
 	  			public loadingCtrl: LoadingController,
@@ -33,6 +34,14 @@ export class AddBillPage {
 			.then(results =>{
 				this.books_today = results[0].object.results;
 				this.amount = results[1].object;
+
+				this.amount_today = 0;
+
+				for(let a of this.books_today){
+					this.amount_today += a.val;
+				}
+
+
 				loader.dismiss();
 			})
 			.catch(

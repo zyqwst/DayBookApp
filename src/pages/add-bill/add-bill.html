@@ -57,6 +57,10 @@
     <ion-row class="list_row">
       <ion-col col-12>
         <ion-list>
+          <ion-item>
+            <p style="text-align:right">今日已消费 <span style="font-weight:bold">￥ {{amount_today | number:'.2-2'}}</span></p>
+
+          </ion-item>
           <button ion-item *ngFor="let item of books_today" class="">
            <ion-avatar item-left>
            <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
