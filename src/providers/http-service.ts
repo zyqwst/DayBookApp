@@ -3,16 +3,24 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions } from '@angular/http';
 import { LoadingController,Loading } from 'ionic-angular';
+import { Dialogs } from '@ionic-native/dialogs';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/timeout';
 
 import { RestEntity } from '../domain/RestEntity';
+import { User } from "../domain/User";
+import { Constants } from "../domain/Constants";
+import { StorageService } from "./storage-service";
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://61.174.50.10:9971";
+    hostUrl:string = "http://192.168.1.106:9971";
+    TIME_OUT:number = 30000;
     constructor(
         private http: Http,
-        public loadingCtrl: LoadingController 
+        public loadingCtrl: LoadingController ,
+        public dialogs: Dialogs,
+        public storageService:StorageService
         ) {
         //this.local = new Storage(LocalStorage);
     }
@@ -20,10 +28,15 @@ export class HttpService {
     public httpGetWithAuth(url: string):Promise<RestEntity> {
         url = `${this.hostUrl}/${url}`;
         var headers = new Headers();
-        headers.append('Authorization',   'username-password');
+        let token = this.getToken();
+        if(token==null) {
+            this.alert('异常','Token获取错误');
+            return;
+        }
+        headers.append(Constants.AUTHORIZATION, token);
         let options = new RequestOptions({ headers: headers });
         
-        return this.http.get(url,options).toPromise()
+        return this.http.get(url,options).timeout(this.TIME_OUT).toPromise()
             .then(res => res.json() as RestEntity)
             .catch(err => {
                 this.handleError(err);
@@ -33,9 +46,8 @@ export class HttpService {
     public httpGetNoAuth(url: string) {
 
         var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(url, options).toPromise()
+        return this.http.get(url, options).timeout(this.TIME_OUT).toPromise()
             .then(res => res.json())
             .catch(err => {
                 this.handleError(err);
@@ -47,13 +59,29 @@ export class HttpService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(url, body,options).toPromise()
+        return this.http.post(url, body,options).timeout(this.TIME_OUT).toPromise()
             .then(res => res.json())
             .catch(err => {
                 this.handleError(err);
             });
     }
-
+    public httpPostWithAuth(url: string, body: any) :Promise<RestEntity>{
+          url = `${this.hostUrl}/${url}`;
+        var headers = new Headers();
+        let token = this.getToken();
+        if(token==null) {
+            this.alert('异常','Token获取错误');
+            return;
+        }
+        headers.append('Content-Type', 'application/json');
+        headers.append(Constants.AUTHORIZATION, token);
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(url, body,options).timeout(this.TIME_OUT).toPromise()
+            .then(res => res.json())
+            .catch(err => {
+                this.handleError(err);
+            });
+    }
 
     private handleError(error: Response) {
         console.log("请求错误"+error);
@@ -68,5 +96,17 @@ export class HttpService {
 				showBackdrop:false //是否显示遮罩层
 			});
         return loader;
+    }
+    public alert(title:string,msg:string) {
+        this.dialogs.alert(msg,title);
+    }
+    /**当前登录用户 */
+    public getCurrUser():User{
+       return this.storageService.read<User>(Constants.CURR_USER);
+    }
+    public getToken():string{
+        let user = this.getCurrUser();
+        let token = user.id+"_"+user.token;
+        return token;
     }
 }

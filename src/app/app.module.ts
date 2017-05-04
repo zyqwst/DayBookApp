@@ -12,11 +12,13 @@ import { BookService } from '../service/BookService';
 import { SaveBillPage} from '../pages/save-bill/save-bill'; 
 import { SearchBill} from '../pages/search-bill/search-bill';
 import { ResultsBill } from '../pages/results-bill/results-bill';
-import { StorageService} from '../service/StorageService';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { StorageService } from "../providers/storage-service";
+import { LoginPage } from "../pages/login-page/login-page";
+import { Dialogs } from "@ionic-native/dialogs";
 @NgModule({
   declarations: [
     MyApp,
@@ -25,7 +27,8 @@ import { DatePipe} from '@angular/common';
     ListPage,
     SaveBillPage,
     SearchBill,
-    ResultsBill
+    ResultsBill,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { DatePipe} from '@angular/common';
     ListPage,
     SaveBillPage,
     SearchBill,
-    ResultsBill
+    ResultsBill,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -51,6 +55,7 @@ import { DatePipe} from '@angular/common';
     HttpService,
     BookService,
     StorageService,
+    Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav,ToastController } from 'ionic-angular';
+import { Platform, MenuController, Nav, ToastController, Events, ModalController } from 'ionic-angular';
 
 import { AddBillPage } from '../pages/add-bill/add-bill';
 import { ListPage } from '../pages/list/list';
@@ -8,6 +8,10 @@ import { SearchBill } from '../pages/search-bill/search-bill';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Constants } from "../domain/Constants";
+import { User } from "../domain/User";
+import { LoginPage } from "../pages/login-page/login-page";
+import { StorageService } from "../providers/storage-service";
 
 @Component({
   selector: 'app',
@@ -20,12 +24,16 @@ export class MyApp {
   backButtonPressed: boolean = false;  //用于判断返回键是否触发
   pages: Array<{title: string, component: any}>;
   hiddenPages: Array<{title: string, component: any}>;
+  curr_user:User;
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public events :Events,
+    public modalCtrl: ModalController,
+    public storageService:StorageService
   ) {
     this.initializeApp();
 
@@ -35,9 +43,14 @@ export class MyApp {
       { title: '月账单', component: SearchBill },
       { title: '流水分析', component: ListPage }
     ];
-   
+    this.initEvent();
   }
-
+  initEvent(){
+    //set curr_user after login
+    this.events.subscribe(Constants.CURR_USER,user => this.curr_user = user );
+    //set swipe enabled
+    this.events.subscribe(Constants.SWIPE_ENABLE,val => this.menu.swipeEnable(val));
+  }
   
 
   initializeApp() {
@@ -45,17 +58,26 @@ export class MyApp {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-       //注册返回按键事件
-      this.platform.registerBackButtonAction((): any => {
+      //注册返回按键事件
+      this.registerBackButtonAction();
+      //登录认证
+      this.authentication();
+    });
+  }
+  registerBackButtonAction(){
+     this.platform.registerBackButtonAction((): any => {
         let activeVC = this.nav.getActive();
         let page = activeVC.instance;
+        if(this.menu.isOpen()){
+          this.menu.close();
+          return;
+        }
         //当前页面非tab栏
-          if (!this.nav.canGoBack()) {
-            return this.showExit();
-          }
-          return this.nav.pop();
+        if (!this.nav.canGoBack() || page instanceof LoginPage) {
+          return this.showExit();
+        }
+        return this.nav.pop();
       }, 101);
-    });
   }
   
   openPage(page) {
@@ -64,7 +86,12 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-  
+   authentication(){
+   if(!this.storageService.read(Constants.CURR_USER)){
+      let modal = this.modalCtrl.create(LoginPage);
+      modal.present();
+   }
+ }
   //双击退出提示框，这里使用Ionic2的ToastController
   showExit() {
     if (this.backButtonPressed) this.platform.exitApp();  //当触发标志为true时，即2秒内双击返回按键则退出APP

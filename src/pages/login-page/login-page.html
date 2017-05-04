@@ -1,0 +1,22 @@
+<ion-content>
+    <ion-row>
+      <ion-col text-center>
+        <ion-icon name="heart" color="danger"></ion-icon>
+      </ion-col>
+    </ion-row>
+   <form [formGroup]="loginForm" (ngSubmit)="login()">
+     <ion-list inset>
+    <ion-item>
+      <ion-label>账号</ion-label>
+      <ion-input type="text"  formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>密码</ion-label>
+      <ion-input type="password" value="" formControlName="password"></ion-input>
+    </ion-item>
+     </ion-list>
+     <div padding>
+      <button ion-button type="submit" color="primary" block>登&nbsp;录</button>
+      </div>
+   </form>
+</ion-content>

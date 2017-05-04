@@ -6,10 +6,10 @@ import { DatePipe} from '@angular/common';
 import { HttpService } from '../../providers/http-service';
 import { BookService } from '../../service/BookService';
 import { Dictionary } from '../../domain/Dictionary';
-import { Constants } from '../../utils/Constant';
 
-import { StorageService} from '../../service/StorageService';
-import {Validators, FormBuilder,FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { StorageService } from "../../providers/storage-service";
+import { Constants } from "../../domain/Constants";
 @Component({
   selector: 'page-save-bill',
   templateUrl: 'save-bill.html'
@@ -38,7 +38,7 @@ export class SaveBillPage{
   }
  loader = this.httpService.loading();
   init(){
-    var billtype = this.storageService.read<Dictionary[]>(Constants.billType);
+    var billtype = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
     if(billtype!=null){
      this.billTypes=billtype;
     }else{
@@ -48,7 +48,7 @@ export class SaveBillPage{
           .then(result =>{
             this.loader.dismiss();
             this.billTypes = result.object;
-            this.storageService.write(Constants.billType,this.billTypes);
+            this.storageService.write(Constants.BILL_TYPE,this.billTypes);
           })
           .catch(error =>{
             this.loader.dismiss();

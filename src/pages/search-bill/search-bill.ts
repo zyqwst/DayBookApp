@@ -4,11 +4,11 @@ import { DatePipe} from '@angular/common';
 
 import { BookService } from '../../service/BookService';
 import { HttpService } from '../../providers/http-service';
-import { StorageService} from '../../service/StorageService';
 import { Dictionary } from '../../domain/Dictionary';
-import { Constants } from '../../utils/Constant';
 import { ResultsBill } from '../../pages/results-bill/results-bill';
 import { QueryBook } from '../../domain/QueryBook';
+import { StorageService } from "../../providers/storage-service";
+import { Constants } from "../../domain/Constants";
 @Component({
   selector: 'page-search-bill',
   templateUrl: 'search-bill.html',
@@ -30,7 +30,7 @@ export class SearchBill {
   }
   loader = this.httpService.loading();
   init(){
-    var billtype = this.storageService.read<Dictionary[]>(Constants.billType);
+    var billtype = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
     if(billtype!=null){
      this.billTypes=billtype;
     }else{
@@ -39,7 +39,7 @@ export class SearchBill {
           .then(result =>{
             this.loader.dismiss();
             this.billTypes = result.object;
-            this.storageService.write(Constants.billType,this.billTypes);
+            this.storageService.write(Constants.BILL_TYPE,this.billTypes);
           })
           .catch(error =>{
             this.loader.dismiss();
