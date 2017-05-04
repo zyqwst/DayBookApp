@@ -44,11 +44,16 @@ export class AddBillPage {
 			.then(results => {
 				loader.dismiss();
 				console.log(results);
-				if(results[0].status==-1 || results[1].status){
+				if(results[0].status==-1){
 					this.httpService.alert('提示',results[0].msg);
 					return;
 				}
+				if(results[1].status==-1){
+					this.httpService.alert('提示',results[1].msg);
+					return;
+				}
 				this.books_today = results[0].object.results;
+
 				this.amount = results[1].object;
 
 				this.amount_today = 0;
@@ -60,7 +65,7 @@ export class AddBillPage {
 				
 			})
 			.catch(
-			error => console.log(error)
+				error => console.log(error)
 			);
 	}
 	addBill() {
