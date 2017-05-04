@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers, RequestOptions } from '@angular/http';
-import { LoadingController,Loading } from 'ionic-angular';
+import { LoadingController,Loading,ToastController  } from 'ionic-angular';
 import { Dialogs } from '@ionic-native/dialogs';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/timeout';
@@ -14,13 +14,14 @@ import { StorageService } from "./storage-service";
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://192.168.1.106:9971";
+    hostUrl:string = "http://192.168.1.103:9971";
     TIME_OUT:number = 30000;
     constructor(
         private http: Http,
         public loadingCtrl: LoadingController ,
         public dialogs: Dialogs,
-        public storageService:StorageService
+        public storageService:StorageService,
+        public toastCtrl: ToastController
         ) {
         //this.local = new Storage(LocalStorage);
     }
@@ -84,7 +85,7 @@ export class HttpService {
     }
 
     private handleError(error: Response) {
-        console.log("请求错误"+error);
+        this.alert("提示",error.toString());
         return Observable.throw(error.json().error || 'Server Error');
     }
 
@@ -99,6 +100,14 @@ export class HttpService {
     }
     public alert(title:string,msg:string) {
         this.dialogs.alert(msg,title);
+    }
+    public toast(msg:string,time?:number) {
+        if(!time) time = 3000;
+        let toast = this.toastCtrl.create({
+            message: msg,
+            duration: time
+        });
+        toast.present();
     }
     /**当前登录用户 */
     public getCurrUser():User{

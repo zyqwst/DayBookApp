@@ -65,7 +65,9 @@ export class AddBillPage {
 				
 			})
 			.catch(
-				error => console.log(error)
+				error => {
+					loader.dismiss();
+				}
 			);
 	}
 	addBill() {

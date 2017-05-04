@@ -1,7 +1,11 @@
 <ion-content>
     <ion-row>
       <ion-col text-center>
-        <ion-icon name="heart" color="danger"></ion-icon>
+        <div style="width:100%;height:20%;">
+          <div class="avator" style="margin:3em auto">
+          <img src="assets/icon/avator.jpg" >
+          </div>
+        </div>
       </ion-col>
     </ion-row>
    <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -16,7 +20,13 @@
     </ion-item>
      </ion-list>
      <div padding>
-      <button ion-button type="submit" color="primary" block>登&nbsp;录</button>
+      <button ion-button type="submit" color="danger" block>登&nbsp;录</button>
       </div>
    </form>
+   <ion-row padding-left padding-right class="forgetPwd">
+     <ion-col>
+        <a (click)="forgetPwd()">忘记密码？</a>
+        <a (click)="register()">注册DayBook</a>
+      </ion-col>
+   </ion-row>
 </ion-content>

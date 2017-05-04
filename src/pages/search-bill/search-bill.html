@@ -23,10 +23,21 @@
         </ion-item>
         <ion-item>
           <ion-label>类型</ion-label>
-          <ion-select okText="确定" cancelText="取消" [(ngModel)]="typeid_and">
+          <ion-select  interface="popover" [(ngModel)]="typeid_and">
             <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
           </ion-select>
         </ion-item>
+       <ion-item>
+      <ion-label>Gaming</ion-label>
+      <ion-select [(ngModel)]="gaming" interface="popover">
+        <ion-option value="nes">NES</ion-option>
+        <ion-option value="n64">Nintendo64</ion-option>
+        <ion-option value="ps">PlayStation</ion-option>
+        <ion-option value="genesis">Sega Genesis</ion-option>
+        <ion-option value="saturn">Sega Saturn</ion-option>
+        <ion-option value="snes">SNES</ion-option>
+      </ion-select>
+    </ion-item>
         <button ion-button color="danger" block (click)="query()">查&nbsp;询</button>
     </ion-list>
 </ion-content>

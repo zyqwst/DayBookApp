@@ -56,7 +56,11 @@ export class LoginPage {
       }
     );   
   }
-  
-
+  forgetPwd(){
+    this.httpService.toast('功能完善中');
+  }
+  register(){
+    this.httpService.toast('功能完善中');
+  }
 
 }

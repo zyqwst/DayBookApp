@@ -49,7 +49,7 @@ export class MyApp {
     //set curr_user after login
     this.events.subscribe(Constants.CURR_USER,user => this.curr_user = user );
     //set swipe enabled
-    this.events.subscribe(Constants.SWIPE_ENABLE,val => this.menu.swipeEnable(val));
+    // this.events.subscribe(Constants.SWIPE_ENABLE,val => this.menu.swipeEnable(val));
   }
   
 
@@ -81,9 +81,7 @@ export class MyApp {
   }
   
   openPage(page) {
-    // close the menu when clicking a link from the menu
     this.menu.close();
-    // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
    authentication(){
@@ -92,9 +90,8 @@ export class MyApp {
       modal.present();
    }
  }
-  //双击退出提示框，这里使用Ionic2的ToastController
   showExit() {
-    if (this.backButtonPressed) this.platform.exitApp();  //当触发标志为true时，即2秒内双击返回按键则退出APP
+    if (this.backButtonPressed) this.platform.exitApp();  
     else {
       let toast = this.toastCtrl.create({
         message: '再按一次退出应用',
@@ -103,10 +100,19 @@ export class MyApp {
       });
       toast.present();
       this.backButtonPressed = true;
-      //2秒内没有再次点击返回则将触发标志标记为false
       setTimeout(() => {
         this.backButtonPressed = false;
       }, 2000)
     }
+  }
+  logout(){
+    this.menu.close();
+    let activeVC = this.nav.getActive();
+    let page = activeVC.instance;
+    if(!(page instanceof AddBillPage)){
+      this.nav.setRoot(this.rootPage);
+    }
+    this.storageService.remove(Constants.CURR_USER);
+    this.authentication();
   }
 }

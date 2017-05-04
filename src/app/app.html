@@ -5,7 +5,7 @@
   </ion-header>
 
   <ion-content>
-    <div style="width:100%;height:20%;text-align:center">
+    <div style="width:100%;height:20%;" center-align>
       <div class="avator" style="margin:3em auto">
        <img src="assets/icon/avator.jpg" >
        </div>
@@ -13,6 +13,9 @@
     <ion-list>
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+      </button>
+      <button ion-item (click)="logout()">
+        退出登录
       </button>
     </ion-list>
     <a><img class="bg" src="assets/icon/bg.png"/></a>
