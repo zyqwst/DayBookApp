@@ -31,10 +31,13 @@ export class LoginPage {
     }
   login(){
     let loader = this.httpService.loading();
+    //发布登录成功消息，刷新首页信息
+    loader.onDidDismiss(()=>{
+      this.events.publish("LOGIN_SUCCESS");
+    });
     loader.present();
     let pwd = this.loginForm.controls['password'].value;
     this.loginForm.controls['password'].setValue(Md5.hashStr(this.loginForm.controls['password'].value).toString());
-    console.log(this.loginForm.value);
     this.httpService.httpPostNoAuth("account/login",this.loginForm.value)
     .then(restEntity =>{
       loader.dismiss();

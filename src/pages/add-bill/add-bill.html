@@ -57,23 +57,20 @@
     <ion-row class="list_row">
       <ion-col col-12>
         <ion-list>
-          <ion-item>
-            <p style="text-align:right">今日已消费 <span style="font-weight:bold">￥ {{amount_today | number:'.2-2'}}</span></p>
-
-          </ion-item>
-          <button ion-item *ngFor="let item of books_today" class="">
+          <button ion-item *ngFor="let item of amounts" class="">
            <ion-avatar item-left>
-           <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
+           <ion-icon name="restaurant" style="font-size:2em"></ion-icon>
            </ion-avatar>
             <div >
-              <p class="item_title">{{item.name}}</p>
+              <p class="item_title">{{item.title}}</p>
               <p class="item_time">&nbsp;</p>
             </div>
             <div class="item_right" item-right>
-              <p class="item_amount">{{item.val | number:'.2-2'}}</p>
-              <p class="item_time">消费时间：{{item.credate | date:"MM-dd HH:mm"}}</p>
+              <p class="item_amount">{{item.amount | number:'.2-2'}}</p>
+              <p class="item_time" *ngIf="item.averageDay!=null">平均一天花{{item.averageDay | number:'.2-2'}}元，有点多哦</p>
             </div>
           </button>
+          
         </ion-list>
       </ion-col>
     </ion-row>
