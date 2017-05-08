@@ -73,25 +73,18 @@ export class SaveBillPage{
         .then(restEntity =>{
           this.loader.dismiss();
           if(restEntity.status==-1){
-            this.showAlert('提示',restEntity.msg);
+            this.httpService.alert(restEntity.msg);
           }else{
             this.initForm();
-            this.showAlert('恭喜','保存成功');
+            this.httpService.toast("保存成功");
           }
         }).catch(
         error => {
           this.loader.dismiss();
-          this.showAlert("保存错误",error);
+         this.httpService.alert(error);
         }
         )
     }
     
-    showAlert(title:string,msg:string) {
-      let alert = this.alertCtrl.create({
-        title: title,
-        subTitle: msg,
-        buttons: ['确定']
-      });
-      alert.present();
-    }
+    
 }

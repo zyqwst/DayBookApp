@@ -43,7 +43,7 @@ export class LoginPage {
       loader.dismiss();
       this.loginForm.controls['password'].setValue(pwd);
       if(restEntity.status == -1){
-        this.httpService.alert("登录失败",restEntity.msg);
+        this.httpService.alert(restEntity.msg,"登录失败");
         return;
       }
         let user:User = restEntity.object;

@@ -63,7 +63,7 @@ export class SearchBill {
     .then(restEntity =>{
       this.loader.dismiss();
       if(restEntity.status==-1){
-            this.showAlert('提示',restEntity.msg);
+            this.httpService.alert(restEntity.msg);
           }else{
             this.loader.dismiss();
             data = restEntity.object.results;
@@ -72,16 +72,9 @@ export class SearchBill {
           }
     })
     .catch(
-      error => this.showAlert("查询错误",error)
+      error => this.httpService.alert(error)
     )
     
   }
-  showAlert(title:string,msg:string) {
-      let alert = this.alertCtrl.create({
-        title: title,
-        subTitle: msg,
-        buttons: ['确定']
-      });
-      alert.present();
-    }
+ 
 }

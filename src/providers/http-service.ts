@@ -98,7 +98,8 @@ export class HttpService {
 			});
         return loader;
     }
-    public alert(title:string,msg:string) {
+    public alert(msg:string,title?:string) {
+        if(title==null) title='提示';
         this.dialogs.alert(msg,title);
     }
     public toast(msg:string,time?:number) {

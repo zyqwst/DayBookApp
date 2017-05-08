@@ -45,23 +45,21 @@ export class AddBillPage {
 			.then(results => {
 				loader.dismiss();
 				if(results[0].status==-1){
-					this.httpService.alert('提示',results[0].msg);
+					this.httpService.alert(results[0].msg);
 					return;
 				}
 				if(results[1].status==-1){
-					this.httpService.alert('提示',results[1].msg);
+					this.httpService.alert(results[1].msg);
 					return;
 				}
 				if(results[2].status==-1){
-					this.httpService.alert('提示',results[2].msg);
+					this.httpService.alert(results[2].msg);
 					return;
 				}
-				console.log(results);
 				this.amounts.push({type:0,amount:results[0].object,title:'当天消费'});
 				this.amounts.push({type:1,amount:results[1].object,title:'本周消费',averageDay:results[1].object/7});
 				this.amounts.push({type:2,amount:results[2].object,title:'本月消费',averageDay:results[2].object/30});
 				this.amount = results[2].object;
-				console.log(this.amounts);
 			})
 			.catch(
 				error => {
