@@ -70,8 +70,12 @@ export class AddBillPage {
 	addBill() {
 		this.navCtrl.push(SaveBillPage);
 	}
+	amountClick(type:number){
+		
+	}
 	doRefresh(event) {
 		this.init();
 		event.complete();
 	}
+
 }

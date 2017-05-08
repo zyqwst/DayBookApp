@@ -35,7 +35,7 @@ export class BookService{
     public saveBook(body:any){
         return this.httpService.httpPostNoAuth(`book/save`,body);
     }
-    public findPage(...params:{key:string,value:any}[]){
+    public findPage(params:Array<{key:string,value:any}>){
         let url:string = "book/list?";
         for(let param of params ){
             url = url + param.key + "=" +param.value+"&&";

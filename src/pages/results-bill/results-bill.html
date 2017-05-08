@@ -12,11 +12,13 @@
 
 
 <ion-content>
-  <ion-grid>
-    <ion-row class="list_row">
-      <ion-col col-12>
-        <ion-list>
-          <button ion-item *ngFor="let item of data" class="">
+
+        <ion-item-group  class="list_row" *ngFor="let item of data;let i=index">
+          <ion-item-divider color="light" *ngIf="i==0">
+            <span>本月</span>
+            <p style="float:right">查看月账单</p>
+          </ion-item-divider>
+          <button ion-item padding-left>
            <ion-avatar item-left>
            <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
            </ion-avatar>
@@ -29,9 +31,7 @@
               <p class="item_time">消费时间：{{item.credate | date:"MM-dd HH:mm"}}</p>
             </div>
           </button>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-item-group>
+ 
 
 </ion-content>

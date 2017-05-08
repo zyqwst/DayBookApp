@@ -55,26 +55,10 @@ export class SearchBill {
   credate_betweenand:string = this.str;
   typeid_and:number;
   query(){
-    this.loader.present();
-    let data:QueryBook[];
-    this.bookService.findPage({key:"credate_between",value:this.credate_between},
+      let params = [{key:"credate_between",value:this.credate_between},
     {key:"credate_betweenand",value:this.credate_betweenand},
-     {key:"typeid_and",value:(this.typeid_and===undefined ?"":this.typeid_and+"_LONG")})
-    .then(restEntity =>{
-      this.loader.dismiss();
-      if(restEntity.status==-1){
-            this.httpService.alert(restEntity.msg);
-          }else{
-            this.loader.dismiss();
-            data = restEntity.object.results;
-            console.log(data);
-            this.navCtrl.push(ResultsBill,{data:data});
-          }
-    })
-    .catch(
-      error => this.httpService.alert(error)
-    )
-    
+     {key:"typeid_and",value:(this.typeid_and===undefined ?"":this.typeid_and+"_LONG")}];
+      this.navCtrl.push(ResultsBill,{params:params});
   }
  
 }
