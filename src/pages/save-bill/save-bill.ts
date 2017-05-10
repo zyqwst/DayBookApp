@@ -47,6 +47,10 @@ export class SaveBillPage{
        this.httpService.httpGetWithAuth("common/dictionary?typeid=1")
           .then(result =>{
             this.loader.dismiss();
+            if(result.status==-1){
+              this.httpService.alert(result.msg);
+              return;
+            }
             this.billTypes = result.object;
             this.storageService.write(Constants.BILL_TYPE,this.billTypes);
           })
