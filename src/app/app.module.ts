@@ -5,6 +5,8 @@ import { MyApp } from './app.component';
 import { AddBillPage } from '../pages/add-bill/add-bill';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { HttpService } from '../providers/http-service';
+import {ChartsModule} from 'ng2-charts/charts/charts';
+import '../../node_modules/chart.js/dist/Chart.bundle.min.js'; 
 
 import { BookService } from '../service/BookService';
 import { SaveBillPage} from '../pages/save-bill/save-bill'; 
@@ -36,7 +38,8 @@ import { IchartPage } from "../pages/ichart-page/ichart-page";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    ChartsModule
     
   ],
   bootstrap: [IonicApp],
