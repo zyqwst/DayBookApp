@@ -70,8 +70,19 @@ export class AddBillPage {
 		this.navCtrl.push(ResultsBill,{params:params});
 	}
 	doRefresh(event) {
-		this.init();
-		event.complete();
+		this.bookService.findAll()
+		.catch(error => event.complete())
+		.then(restEntity =>{
+			event.complete();
+			if(restEntity.status==-1){
+				this.httpService.alert(restEntity.msg);
+				return;
+			}
+			this.books = restEntity.object.results;
+			this.amounts = this.bookService.calAmount(this.books);
+			if(this.amounts==null) return;
+			this.amount = this.amounts[2].amount;
+		});
 	}
 	
 }
