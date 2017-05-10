@@ -19,6 +19,7 @@ import { LoginPage } from "../pages/login-page/login-page";
 import { Dialogs } from "@ionic-native/dialogs";
 import { StickyDirevtive } from "../components/sticky-direvtive/sticky-direvtive";
 import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
+import { IchartPage } from "../pages/ichart-page/ichart-page";
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +29,8 @@ import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
     ResultsBill,
     LoginPage,
     MonthPopPage,
-    StickyDirevtive
+    StickyDirevtive,
+    IchartPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
     SearchBill,
     ResultsBill,
     LoginPage,
-    MonthPopPage
+    MonthPopPage,
+    IchartPage
   ],
   providers: [
     StatusBar,
