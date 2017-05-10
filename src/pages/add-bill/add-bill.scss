@@ -56,7 +56,12 @@ page-add-bill {
 		*{
 			color:#555;
 		}
-
+		ion-avatar {
+			ion-icon{
+				font-size:2em;
+				color:darkgoldenrod
+			}
+		}
 		button{
 			padding-left:0;
 		}

@@ -2,36 +2,50 @@ import { Injectable } from '@angular/core';
 import { DatePipe} from '@angular/common';
 import { HttpService } from '../providers/http-service';
 import { DateUtils } from "../utils/date-utils";
+import { QueryBook } from "../domain/QueryBook";
 @Injectable()
 export class BookService{
     constructor(
         private httpService :HttpService,private datePipe :DatePipe
         ){}
+    /**查询当天前后三十天的数据 */
     public findAll(){
-        return this.httpService.httpGetWithAuth("book/list");
+        let start = this.datePipe.transform(DateUtils.getDateAfterDays(-30),'yyyy-MM-dd');
+        let end = this.datePipe.transform(DateUtils.getDateAfterDays(30),'yyyy-MM-dd');
+        return this.httpService.httpGetWithAuth(`book/list?credate_between=${start}&&credate_betweenand=${end}`);
     }
     public findToday(){
         var date = new Date();
         var str = this.datePipe.transform(date, 'yyyy-MM-dd');
         return this.httpService.httpGetWithAuth(`book/list?credate_like=${str}`);
     }
-    public getTodayAmount(){
-        let date = new Date();
-        let str = this.datePipe.transform(date, 'yyyy-MM-dd');
-        return this.httpService.httpGetWithAuth(`book/amount?credate_and=${str}`);
+    public calAmount(books:Array<QueryBook>):Array<{type:number,amount:number,title:string,averageDay?:number}>{
+        if(books==null) return null;
+        let todayAmount=0,weekAmount=0,monthAmount=0;
+        let amounts:Array<any> = new Array();
+        for(let book of books){
+            let credate = DateUtils.getBeginDate(new Date(book.credate));
+            let firstDayOfWeek = DateUtils.getBeginDate(DateUtils.getFirstDayOfWeek(new Date()));
+            let lastDayOfWeek = DateUtils.getBeginDate(DateUtils.getLastDayOfWeek(new Date()));
+            let firstDayOfMonth = DateUtils.getBeginDate(DateUtils.getFirstDayOfMonth(new Date()));
+            let lastDayOfMonth = DateUtils.getBeginDate(DateUtils.getLastDayOfMonth(new Date()));
+            
+            if(credate>= DateUtils.getBeginDate(new Date()) && credate<=DateUtils.getEndDate(new Date())){
+                todayAmount += book.val;
+            }
+            if(credate >= firstDayOfWeek && credate <= lastDayOfWeek){
+                weekAmount += book.val;
+            }
+            if(credate >= firstDayOfMonth && credate <= lastDayOfMonth){
+                monthAmount += book.val;
+            }
+        }
+        amounts.push({type:0,amount:todayAmount,title:'今天',icon:'ios-calendar-outline'});
+        amounts.push({type:1,amount:weekAmount,title:'本周',icon:'md-calendar'});
+        amounts.push({type:2,amount:monthAmount,title:'本月',icon:'ios-calendar'});
+        return amounts;
     }
-    public getCurWeekAmount(){
-        let date = new Date();
-        let start = this.datePipe.transform(DateUtils.getFirstDayOfWeek(date), 'yyyy-MM-dd');
-        let end = this.datePipe.transform(DateUtils.getLastDayOfWeek(date), 'yyyy-MM-dd');
-        return this.httpService.httpGetWithAuth(`book/amount?credate_between=${start}&&credate_betweenand=${end}`);
-    }
-    public getCurMonthAmount(){
-        let date = new Date();
-        let start = this.datePipe.transform(DateUtils.getFirstDayOfMonth(date), 'yyyy-MM-dd');
-        let end = this.datePipe.transform(DateUtils.getLastDayOfMonth(date), 'yyyy-MM-dd');
-        return this.httpService.httpGetWithAuth(`book/amount?credate_between=${start}&&credate_betweenand=${end}`);
-    }
+   
     public saveBook(body:any){
         return this.httpService.httpPostNoAuth(`book/save`,body);
     }
@@ -40,8 +54,6 @@ export class BookService{
         for(let param of params ){
             url = url + param.key + "=" +param.value+"&&";
         }
-        
-        console.log(url);
         return this.httpService.httpGetWithAuth(url);
     }
 }

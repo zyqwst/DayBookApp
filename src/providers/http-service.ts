@@ -14,7 +14,7 @@ import { StorageService } from "./storage-service";
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://192.168.1.103:9971";
+    hostUrl:string = "http://192.168.1.106:9971";
     TIME_OUT:number = 30000;
     constructor(
         private http: Http,
@@ -51,6 +51,7 @@ export class HttpService {
         return this.http.get(url, options).timeout(this.TIME_OUT).toPromise()
             .then(res => res.json())
             .catch(err => {
+                console.log('访问错误：'+err);
                 this.handleError(err);
             });
     }

@@ -59,7 +59,7 @@
         <ion-list>
           <button ion-item *ngFor="let item of amounts" class="" (click)="amountClick(item.type)">
            <ion-avatar item-left>
-           <ion-icon name="restaurant" style="font-size:2em"></ion-icon>
+           <ion-icon name="{{item.icon}}"></ion-icon>
            </ion-avatar>
             <div >
               <p class="item_title">{{item.title}}</p>
@@ -67,7 +67,7 @@
             </div>
             <div class="item_right" item-right>
               <p class="item_amount">{{item.amount | number:'.2-2'}}</p>
-              <p class="item_time" *ngIf="item.averageDay!=null">平均一天花{{item.averageDay | number:'.2-2'}}元，有点多哦</p>
+              <p class="item_time"></p>
             </div>
           </button>
           

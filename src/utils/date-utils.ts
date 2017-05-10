@@ -21,11 +21,39 @@ export class DateUtils{
     /**本周最后一天 */
     public static getLastDayOfWeek(date:Date):Date{
         let time = date;
-        time.setDate(time.getDate() + 6);
+        time.setDate(time.getDate() - time.getDay() + 7);
         return time;
     }
     /**获取本月天数 */
     public static getCountOfMonth(date:Date):number{
        return  date.getDate();
+    }
+    /**获取第几天后的日期，负数表示几天前 */
+    public static getDateAfterDays(days:number):Date{
+        let time = new Date();
+        time.setDate(time.getDate()+days);
+        return time;
+    }
+    /**获得 日期 00:00:00 */
+    public static getBeginDate(date:Date):Date{
+        let year = date.getFullYear();
+        let month = date.getMonth()+1;
+        let day = date.getDate();
+        let time = new Date('1900-01-01 00:00:00');
+        time.setFullYear(year);
+        time.setMonth(month);
+        time.setDate(day);
+        return new Date(time);        
+    }
+    /**获得 日期 023：59：59 */
+    public static getEndDate(date:Date):Date{
+        let year = date.getFullYear();
+        let month = date.getMonth()+1;
+        let day = date.getDate();
+        let time = new Date('1900-01-01 23:59:59');
+        time.setFullYear(year);
+        time.setMonth(month);
+        time.setDate(day);
+        return new Date(time);        
     }
 }

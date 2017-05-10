@@ -6,14 +6,16 @@ import { BookService } from '../../service/BookService';
 import { HttpService } from '../../providers/http-service';
 import { SaveBillPage } from '../../pages/save-bill/save-bill'
 import { Constants } from "../../domain/Constants";
+import { QueryBook } from "../../domain/QueryBook";
 @Component({
 	selector: 'page-add-bill',
 	templateUrl: 'add-bill.html'
 })
 /**首页面 */
 export class AddBillPage {
-	amounts:Array<{type:number,amount:number,title:string,averageDay?:number}>;
+	amounts:Array<{type:number,amount:number,title:string,icon?:string,averageDay?:number}>;
 	amount:number;
+	books:Array<QueryBook>;
 	constructor(public bookService: BookService,
 		public httpService: HttpService,
 		public loadingCtrl: LoadingController,
@@ -38,34 +40,22 @@ export class AddBillPage {
 		
 	}
 	init() {
-		this.amounts = new Array();
 		let loader = this.httpService.loading();
 		loader.present();
-		Promise.all([this.bookService.getTodayAmount(),this.bookService.getCurWeekAmount(), this.bookService.getCurMonthAmount()])
-			.then(results => {
-				loader.dismiss();
-				if(results[0].status==-1){
-					this.httpService.alert(results[0].msg);
-					return;
-				}
-				if(results[1].status==-1){
-					this.httpService.alert(results[1].msg);
-					return;
-				}
-				if(results[2].status==-1){
-					this.httpService.alert(results[2].msg);
-					return;
-				}
-				this.amounts.push({type:0,amount:results[0].object,title:'当天消费'});
-				this.amounts.push({type:1,amount:results[1].object,title:'本周消费',averageDay:results[1].object/7});
-				this.amounts.push({type:2,amount:results[2].object,title:'本月消费',averageDay:results[2].object/30});
-				this.amount = results[2].object;
-			})
-			.catch(
-				error => {
-					loader.dismiss();
-				}
-			);
+		this.bookService.findAll()
+		.catch(error => loader.dismiss())
+		.then(restEntity =>{
+			loader.dismiss();
+			if(restEntity.status==-1){
+				this.httpService.alert(restEntity.msg);
+				return;
+			}
+			this.books = restEntity.object.results;
+			this.amounts = this.bookService.calAmount(this.books);
+			if(this.amounts==null) return;
+			this.amount = this.amounts[2].amount;
+		});
+
 	}
 	addBill() {
 		this.navCtrl.push(SaveBillPage);
@@ -77,5 +67,5 @@ export class AddBillPage {
 		this.init();
 		event.complete();
 	}
-
+	
 }
