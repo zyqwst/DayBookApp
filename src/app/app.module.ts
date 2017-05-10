@@ -20,6 +20,7 @@ import { StorageService } from "../providers/storage-service";
 import { LoginPage } from "../pages/login-page/login-page";
 import { Dialogs } from "@ionic-native/dialogs";
 import { StickyDirevtive } from "../components/sticky-direvtive/sticky-direvtive";
+import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
 @NgModule({
   declarations: [
     MyApp,
@@ -30,6 +31,7 @@ import { StickyDirevtive } from "../components/sticky-direvtive/sticky-direvtive
     SearchBill,
     ResultsBill,
     LoginPage,
+    MonthPopPage,
     StickyDirevtive
   ],
   imports: [
@@ -48,7 +50,8 @@ import { StickyDirevtive } from "../components/sticky-direvtive/sticky-direvtive
     SaveBillPage,
     SearchBill,
     ResultsBill,
-    LoginPage
+    LoginPage,
+    MonthPopPage
   ],
   providers: [
     StatusBar,

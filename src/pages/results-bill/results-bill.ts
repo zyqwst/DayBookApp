@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, ViewController } from 'ionic-angular';
 import { QueryBook } from '../../domain/QueryBook';
 import { BookService } from "../../service/BookService";
 import { HttpService } from "../../providers/http-service";
+import { MonthPopPage } from "../month-pop-page/month-pop-page";
+import { DateUtils } from "../../utils/date-utils";
+
 @Component({
   selector: 'page-results-bill',
   templateUrl: 'results-bill.html',
@@ -11,13 +14,16 @@ export class ResultsBill {
   data:QueryBook[];
   params:Array<{key:string,value:any}>;//查询条件
   loader = this.httpService.loading();
+  month:number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private bookService :BookService,
-              private httpService :HttpService,) {
+              private httpService :HttpService,
+              public popoverCtrl: PopoverController) {
   }
   
 
   ionViewDidLoad() {
+    this.month = new Date().getMonth()+1;
     this.params = this.navParams.get("params");
     this.query();
   }
@@ -30,12 +36,42 @@ export class ResultsBill {
             this.httpService.alert(restEntity.msg);
           }else{
             this.data = restEntity.object.results;
-            console.log(this.data);
           }
     })
     .catch(
       error => this.httpService.alert(error)
     )
     
+  }
+  doRefresh(event){
+    this.bookService.findPage(this.params)
+    .then(restEntity =>{
+      event.complete();
+      if(restEntity.status==-1){
+            this.httpService.alert(restEntity.msg);
+          }else{
+            this.data = restEntity.object.results;
+          }
+    })
+    .catch(
+      error => this.httpService.alert(error)
+    )
+  }
+  presentMonth(ev){
+    let popover = this.popoverCtrl.create(MonthPopPage);
+    popover.present({ev});
+    popover.onDidDismiss((data)=>{
+      let date = new Date();
+      this.month = data;
+      date.setMonth(data-1);
+      let start = DateUtils.getStrFullDate(DateUtils.getBeginDate(DateUtils.getFirstDayOfMonth(date)));
+      let end = DateUtils.getStrFullDate(DateUtils.getEndDate(DateUtils.getLastDayOfMonth(date)));
+      this.params = [{key:"credate_between",value:start},{key:"credate_betweenand",value:end}];
+      this.query();
+    });
+  }
+
+  queryChart(){
+    alert('查看图标');
   }
 }

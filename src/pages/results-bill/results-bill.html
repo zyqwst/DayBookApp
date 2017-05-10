@@ -1,24 +1,32 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle >
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
       月账单
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentMonth($event)">
+        <ion-icon name="md-calendar"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
 
 
-<ion-content>
-
-        <ion-item-group  class="list_row" *ngFor="let item of data;let i=index">
-          <ion-item-divider color="light" *ngIf="i==0">
-            <span>本月</span>
-            <p style="float:right">查看月账单</p>
-          </ion-item-divider>
-          <button ion-item padding-left>
+  <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-item-group class="list_row" >
+      <ion-item-divider color="light">
+          <span >{{month}}月</span>
+          <a style="float:right" (click)="queryChart()">查看月账单</a>
+      </ion-item-divider>
+      <button ion-item padding-left *ngFor="let item of data;let i=index">
            <ion-avatar item-left>
            <ion-icon name="{{item.icon}}" style="font-size:2em"></ion-icon>
            </ion-avatar>
@@ -31,7 +39,7 @@
               <p class="item_time">{{item.credate | date:"MM-dd HH:mm"}}</p>
             </div>
           </button>
-        </ion-item-group>
- 
+    </ion-item-group>
 
-</ion-content>
+
+  </ion-content>
