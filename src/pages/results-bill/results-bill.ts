@@ -5,6 +5,7 @@ import { BookService } from "../../service/BookService";
 import { HttpService } from "../../providers/http-service";
 import { MonthPopPage } from "../month-pop-page/month-pop-page";
 import { DateUtils } from "../../utils/date-utils";
+import { IchartPage } from "../ichart-page/ichart-page";
 
 @Component({
   selector: 'page-results-bill',
@@ -72,6 +73,6 @@ export class ResultsBill {
   }
 
   queryChart(){
-    alert('查看图标');
+    this.navCtrl.push(IchartPage,{'data':this.data});
   }
 }
