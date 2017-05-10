@@ -7,6 +7,8 @@ import { HttpService } from '../../providers/http-service';
 import { SaveBillPage } from '../../pages/save-bill/save-bill'
 import { Constants } from "../../domain/Constants";
 import { QueryBook } from "../../domain/QueryBook";
+import { ResultsBill } from "../results-bill/results-bill";
+import { DateUtils } from "../../utils/date-utils";
 @Component({
 	selector: 'page-add-bill',
 	templateUrl: 'add-bill.html'
@@ -60,8 +62,12 @@ export class AddBillPage {
 	addBill() {
 		this.navCtrl.push(SaveBillPage);
 	}
+	/**跳转到月账单 */
 	amountClick(type:number){
-		
+		let start = DateUtils.getStrDate(DateUtils.getFirstDayOfMonth(new Date()));
+		let end = DateUtils.getStrDate(DateUtils.getLastDayOfMonth(new Date()));
+		let params = [{key:"credate_between",value:start},{key:"credate_betweenand",value:end}];
+		this.navCtrl.push(ResultsBill,{params:params});
 	}
 	doRefresh(event) {
 		this.init();

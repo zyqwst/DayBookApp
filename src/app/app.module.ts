@@ -19,6 +19,7 @@ import { DatePipe } from '@angular/common';
 import { StorageService } from "../providers/storage-service";
 import { LoginPage } from "../pages/login-page/login-page";
 import { Dialogs } from "@ionic-native/dialogs";
+import { StickyDirevtive } from "../components/sticky-direvtive/sticky-direvtive";
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +29,8 @@ import { Dialogs } from "@ionic-native/dialogs";
     SaveBillPage,
     SearchBill,
     ResultsBill,
-    LoginPage
+    LoginPage,
+    StickyDirevtive
   ],
   imports: [
     BrowserModule,

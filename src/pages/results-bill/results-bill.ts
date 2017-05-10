@@ -22,7 +22,6 @@ export class ResultsBill {
     this.query();
   }
   query(){
-    console.log(this.params);
     this.loader.present();
     this.bookService.findPage(this.params)
     .then(restEntity =>{
@@ -31,6 +30,7 @@ export class ResultsBill {
             this.httpService.alert(restEntity.msg);
           }else{
             this.data = restEntity.object.results;
+            console.log(this.data);
           }
     })
     .catch(
