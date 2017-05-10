@@ -3,8 +3,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AddBillPage } from '../pages/add-bill/add-bill';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { HttpService } from '../providers/http-service';
 
@@ -25,8 +23,6 @@ import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
   declarations: [
     MyApp,
     AddBillPage,
-    ItemDetailsPage,
-    ListPage,
     SaveBillPage,
     SearchBill,
     ResultsBill,
@@ -45,8 +41,6 @@ import { MonthPopPage } from "../pages/month-pop-page/month-pop-page";
   entryComponents: [
     MyApp,
     AddBillPage,
-    ItemDetailsPage,
-    ListPage,
     SaveBillPage,
     SearchBill,
     ResultsBill,

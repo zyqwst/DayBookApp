@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav, ToastController, Events, ModalController } from 'ionic-angular';
 
 import { AddBillPage } from '../pages/add-bill/add-bill';
-import { ListPage } from '../pages/list/list';
 import { SearchBill } from '../pages/search-bill/search-bill';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,7 +40,6 @@ export class MyApp {
     this.pages = [
       { title: '记一笔', component: AddBillPage },
       { title: '月账单', component: SearchBill },
-      { title: '流水分析', component: ListPage }
     ];
     this.initEvent();
   }

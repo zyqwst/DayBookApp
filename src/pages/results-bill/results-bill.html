@@ -24,7 +24,9 @@
     <ion-item-group class="list_row" >
       <ion-item-divider color="light">
           <span >{{month}}月</span>
-          <a style="float:right" (click)="queryChart()">查看月账单</a>
+          <a style="float:right" (click)="queryChart()">月账单
+            <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+          </a>
       </ion-item-divider>
       <button ion-item padding-left *ngFor="let item of data;let i=index">
            <ion-avatar item-left>
