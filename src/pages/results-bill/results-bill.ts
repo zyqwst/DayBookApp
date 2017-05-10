@@ -16,6 +16,7 @@ export class ResultsBill {
   params:Array<{key:string,value:any}>;//查询条件
   loader = this.httpService.loading();
   month:number;
+  event:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private bookService :BookService,
               private httpService :HttpService,
@@ -45,6 +46,7 @@ export class ResultsBill {
     
   }
   doRefresh(event){
+    this.event = event;
     this.bookService.findPage(this.params)
     .then(restEntity =>{
       event.complete();
@@ -62,13 +64,14 @@ export class ResultsBill {
     let popover = this.popoverCtrl.create(MonthPopPage);
     popover.present({ev});
     popover.onDidDismiss((data)=>{
+      if(data==null) return;
       let date = new Date();
       this.month = data;
       date.setMonth(data-1);
       let start = DateUtils.getStrFullDate(DateUtils.getBeginDate(DateUtils.getFirstDayOfMonth(date)));
       let end = DateUtils.getStrFullDate(DateUtils.getEndDate(DateUtils.getLastDayOfMonth(date)));
       this.params = [{key:"credate_between",value:start},{key:"credate_betweenand",value:end}];
-      this.query();
+      this.doRefresh(this.event);
     });
   }
 
