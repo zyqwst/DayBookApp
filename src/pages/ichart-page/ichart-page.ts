@@ -21,32 +21,44 @@ export class IchartPage {
   pieChartLabels:string[];
   pieChartData:number[];
   pieChartType:string = 'pie';
+  sumamount:number;//本月总消费
+  month:number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public storageService:StorageService) {
-  }
-
-  ionViewDidLoad() {
-    this.data = this.navParams.get('data');
-    this.billtypes = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
     this.init();
-    console.log(this.pieChartLabels);
-    console.log(this.pieChartData);
+  }
+  
+  ionViewDidLoad() {
+    
   }
 
+  //初始化chart数据，必须放在constructor中，否则chart无法正常加载
   init(){
+    this.data = this.navParams.get('data');
+    this.month = this.navParams.get('month');
+    this.billtypes = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
+
+    this.sumamount = 0;
+    for(let q of this.data){
+      this.sumamount += q.val;
+    }
+
     if(this.data==null) return;
     this.pieChartLabels = new Array();
     this.pieChartData = new Array();
     for(let type of this.billtypes){
       let amount:number = 0;
-      this.pieChartLabels.push(type.name);
       for(let val of this.data){
         if(val.typeid==type.id){
           amount += val.val;
         }
       }
-      this.pieChartData.push(amount);
+      this.pieChartData.push(parseFloat(amount.toFixed(2)));
+      this.pieChartLabels.push(type.name);
     }
+    console.log(this.pieChartLabels);
+    console.log(this.pieChartData);
+
   }
 
   

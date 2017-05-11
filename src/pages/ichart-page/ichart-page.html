@@ -7,8 +7,11 @@
 
 </ion-header>
 
-
 <ion-content>
+   <div ion-item color="lignt">
+    <ion-label>{{month}}月共消费</ion-label>
+    <ion-label text-right style="font-size:1.5em;font-weight:bold">￥{{sumamount  | number:'.2-2'}}</ion-label>
+   </div>
    <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"

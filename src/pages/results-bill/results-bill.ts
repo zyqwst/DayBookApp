@@ -14,7 +14,7 @@ import { IchartPage } from "../ichart-page/ichart-page";
 export class ResultsBill {
   data:QueryBook[];
   params:Array<{key:string,value:any}>;//查询条件
-  loader = this.httpService.loading();
+  loader ;
   month:number;
   event:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -30,6 +30,7 @@ export class ResultsBill {
     this.query();
   }
   query(){
+    this.loader = this.httpService.loading();
     this.loader.present();
     this.bookService.findPage(this.params)
     .then(restEntity =>{
@@ -71,11 +72,11 @@ export class ResultsBill {
       let start = DateUtils.getStrFullDate(DateUtils.getBeginDate(DateUtils.getFirstDayOfMonth(date)));
       let end = DateUtils.getStrFullDate(DateUtils.getEndDate(DateUtils.getLastDayOfMonth(date)));
       this.params = [{key:"credate_between",value:start},{key:"credate_betweenand",value:end}];
-      this.doRefresh(this.event);
+      this.query();
     });
   }
 
   queryChart(){
-    this.navCtrl.push(IchartPage,{'data':this.data});
+    this.navCtrl.push(IchartPage,{'data':this.data,'month':this.month});
   }
 }
