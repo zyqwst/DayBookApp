@@ -47,7 +47,7 @@ export class BookService{
     }
    
     public saveBook(body:any){
-        return this.httpService.httpPostNoAuth(`book/save`,body);
+        return this.httpService.httpPostWithAuth(`book/save`,body);
     }
     public findPage(params:Array<{key:string,value:any}>){
         let url:string = "book/list?";
