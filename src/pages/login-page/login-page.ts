@@ -32,7 +32,7 @@ export class LoginPage {
   login(){
     let loader = this.httpService.loading();
     //发布登录成功消息，刷新首页信息
-    loader.onDidDismiss(()=>{
+    this.viewCtrl.onDidDismiss(()=>{
       this.events.publish("LOGIN_SUCCESS");
     });
     loader.present();
