@@ -21,6 +21,7 @@ export class IchartPage {
   pieChartLabels:string[];
   pieChartData:number[];
   pieChartType:string = 'pie';
+  pieChartOptions:any={position:"bottom"};
   sumamount:number;//本月总消费
   month:number;
   constructor(public navCtrl: NavController, public navParams: NavParams,

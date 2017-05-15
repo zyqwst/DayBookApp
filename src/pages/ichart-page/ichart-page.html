@@ -15,7 +15,8 @@
    <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"
-          [chartType]="pieChartType"
+          [chartType]="pieChartType" 
+          [options]="pieChartOptions"
           (chartHover)="chartHovered($event)"
           (chartClick)="chartClicked($event)"></canvas>
 </ion-content>

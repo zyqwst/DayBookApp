@@ -11,6 +11,7 @@ import { Constants } from "../domain/Constants";
 import { User } from "../domain/User";
 import { LoginPage } from "../pages/login-page/login-page";
 import { StorageService } from "../providers/storage-service";
+import { HttpService } from "../providers/http-service";
 
 @Component({
   selector: 'app',
@@ -32,7 +33,8 @@ export class MyApp {
     public toastCtrl: ToastController,
     public events :Events,
     public modalCtrl: ModalController,
-    public storageService:StorageService
+    public storageService:StorageService,
+    public httpService:HttpService
   ) {
     this.initializeApp();
 
@@ -60,6 +62,8 @@ export class MyApp {
       this.registerBackButtonAction();
       //登录认证
       this.authentication();
+
+      this.initBillType();
     });
   }
   registerBackButtonAction(){
@@ -77,7 +81,22 @@ export class MyApp {
         return this.nav.pop();
       }, 101);
   }
-  
+  initBillType(){
+    let billtypes = this.storageService.read(Constants.BILL_TYPE);
+    if(billtypes!=null) return;
+    this.httpService.httpGetWithAuth("common/dictionary?typeid=1")
+          .then(result =>{
+            if(result.status==-1){
+              this.httpService.alert(result.msg);
+              return;
+            }
+            let billTypes = result.object;
+            this.storageService.write(Constants.BILL_TYPE,billTypes);
+          })
+          .catch(error =>{
+            console.log(error);
+          });
+  }
   openPage(page) {
     this.menu.close();
     this.nav.setRoot(page.component);
