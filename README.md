@@ -1,9 +1,9 @@
-##DayBookApp
+## DayBookApp
 
     Ionic2构建的一款流水账记录App。
 服务端 GitHub 请点击[DayBook](https://github.com/zyqwst/DayBook)
 
-##效果预览
+## 效果预览
 
 ![登录](http://upload-images.jianshu.io/upload_images/2287481-8e76339928cc64ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
