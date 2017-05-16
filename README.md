@@ -3,7 +3,20 @@
 服务端 GitHub [DayBook](https://github.com/zyqwst/DayBook)
 
 ##效果预览
-![效果图](http://upload-images.jianshu.io/upload_images/2287481-bf288c00503b171c.gif)
+![登录](http://upload-images.jianshu.io/upload_images/2287481-8e76339928cc64ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![home页](http://upload-images.jianshu.io/upload_images/2287481-05581a5407f2388b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![记账](http://upload-images.jianshu.io/upload_images/2287481-2f4e2d1c92fb4cb0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![记账](http://upload-images.jianshu.io/upload_images/2287481-e6bc7043a49d1a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![月账单](http://upload-images.jianshu.io/upload_images/2287481-5095423f4ab2beda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![饼状图分析](http://upload-images.jianshu.io/upload_images/2287481-cd1936f4c4c49ef9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![饼状图分析](http://upload-images.jianshu.io/upload_images/2287481-7ccb38fb1fd83a14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ## 启动说明
 DayBookApp运行需要API服务器资源支持，服务端代码请查看[DayBook](https://github.com/zyqwst/DayBook)。
 - 服务器启动完成后，
