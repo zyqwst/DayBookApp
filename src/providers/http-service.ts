@@ -116,7 +116,7 @@ export class HttpService {
        return this.storageService.read<User>(Constants.CURR_USER);
     }
     public getToken():string{
-        let user = this.getCurrUser();
+        let user = this.getCurrUser(); 
         if(user==null){this.alert('Token错误，请登录后重试');}
         let token = user.id+"_"+user.token;
         return token;
