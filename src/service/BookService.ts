@@ -24,7 +24,7 @@ export class BookService{
         let todayAmount=0,weekAmount=0,monthAmount=0;
         let amounts:Array<any> = new Array();
         for(let book of books){
-            let credate = DateUtils.getBeginDate(new Date(book.credate));
+            let credate = DateUtils.getBeginDate(new Date(book.credate.replace(/-/g,"/")));
             let firstDayOfWeek = DateUtils.getBeginDate(DateUtils.getFirstDayOfWeek(new Date()));
             let lastDayOfWeek = DateUtils.getBeginDate(DateUtils.getLastDayOfWeek(new Date()));
             let firstDayOfMonth = DateUtils.getBeginDate(DateUtils.getFirstDayOfMonth(new Date()));
