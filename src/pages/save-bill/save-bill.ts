@@ -68,7 +68,8 @@ export class SaveBillPage{
             id:[''],
             typeid: ['', Validators.required],
             val: ['', Validators.required],
-            credate:[this.defaultDate, Validators.required] 
+            credate:[this.defaultDate, Validators.required],
+            remark:['']
         });
     }
     logForm(){

@@ -3,4 +3,5 @@ export class Book{
     public typeid:number;
     public val:number;
     public credate:string;
+    public remark:string;
 }
