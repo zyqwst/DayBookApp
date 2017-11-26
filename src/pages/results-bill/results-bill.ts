@@ -7,6 +7,8 @@ import { MonthPopPage } from "../month-pop-page/month-pop-page";
 import { DateUtils } from "../../utils/date-utils";
 import { IchartPage } from "../ichart-page/ichart-page";
 import { Dictionary } from '../../domain/Dictionary';
+import { Constants } from '../../domain/Constants';
+import { StorageService } from '../../providers/storage-service';
 
 @Component({
   selector: 'page-results-bill',
@@ -16,22 +18,48 @@ export class ResultsBill {
   data:QueryBook[];
   params:Array<{key:string,value:any}>;//查询条件
   loader ;
-  month:number;
+  month:any;
   event:any;
   billTypes:Dictionary[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private bookService :BookService,
               private httpService :HttpService,
+              private storageService :StorageService,
               public popoverCtrl: PopoverController) {
   }
-  
-
+  typeid_and:number=-1;
+  sumamount:number;//本月总消费
   ionViewDidLoad() {
-    this.month = new Date().getMonth()+1;
     this.params = this.navParams.get("params");
+    this.month = this.params[0].value;
+    this.query();
+    this.init();
+  }
+  init(){
+    var billtype = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
+    if(billtype!=null){
+     this.billTypes=billtype;
+    }else{
+       this.loader.present();
+       this.httpService.httpGetWithAuth("common/dictionary?typeid=1")
+          .then(result =>{
+            this.loader.dismiss();
+            this.billTypes = result.object;
+            this.storageService.write(Constants.BILL_TYPE,this.billTypes);
+          })
+          .catch(error =>{
+            this.loader.dismiss();
+            console.log(error);
+          });
+      
+    }
+		billtype.splice(0,0,new Dictionary(-1,"全部类型",null,null));
+  }
+  typeChanged(){
     this.query();
   }
   query(){
+    this.params.push({key:"typeid_and",value:(this.typeid_and==-1 ?"":this.typeid_and+"_LONG")});
     this.loader = this.httpService.loading();
     this.loader.present();
     this.bookService.findPage(this.params)
@@ -41,6 +69,10 @@ export class ResultsBill {
             this.httpService.alert(restEntity.msg);
           }else{
             this.data = restEntity.object.results;
+            this.sumamount = 0;
+            for(let q of this.data){
+              this.sumamount += q.val;
+            }
           }
     })
     .catch(

@@ -16,12 +16,6 @@
           <ion-label>月份</ion-label>
           <ion-datetime displayFormat="YYYY-MM" pickerFormat="YYYY-MM" [(ngModel)]="credate_yearAndMonth"  doneText="确定" cancelText="取消"></ion-datetime>
       </ion-item>
-        <ion-item>
-          <ion-label>类型</ion-label>
-          <ion-select  interface="popover" [(ngModel)]="typeid_and" okText="确定" cancelText="取消">
-            <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
-          </ion-select>
-        </ion-item>
         <button ion-button color="danger" block (click)="query()">查&nbsp;询</button>
     </ion-list>
 </ion-content>

@@ -26,29 +26,10 @@ export class SearchBill {
   }
   
   ionViewDidLoad() {
-    this.init();
+    
   }
   loader = this.httpService.loading();
-  init(){
-    var billtype = this.storageService.read<Dictionary[]>(Constants.BILL_TYPE);
-    if(billtype!=null){
-     this.billTypes=billtype;
-    }else{
-       this.loader.present();
-       this.httpService.httpGetWithAuth("common/dictionary?typeid=1")
-          .then(result =>{
-            this.loader.dismiss();
-            this.billTypes = result.object;
-            this.storageService.write(Constants.BILL_TYPE,this.billTypes);
-          })
-          .catch(error =>{
-            this.loader.dismiss();
-            console.log(error);
-          });
-      
-    }
-		
-  }
+  
   date = new Date();
   str:string = this.datePipe.transform(this.date, 'yyyy-MM');
   credate_yearAndMonth:string = this.str;

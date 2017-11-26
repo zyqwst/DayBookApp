@@ -22,11 +22,12 @@
       </ion-refresher-content>
     </ion-refresher>
     <ion-item-group class="list_row" >
-      <ion-item>
-          <ion-select  interface="popover" [(ngModel)]="typeid_and" okText="确定" cancelText="取消">
+      <ion-item-divider>
+          <ion-label  style="text-align:left;font-weight:bold">￥{{sumamount  | number:'.2-2'}}</ion-label>
+          <ion-select style="margin:0;padding:0 6px" interface="popover" [(ngModel)]="typeid_and" (ionChange)="typeChanged($event)">
             <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
           </ion-select>
-      </ion-item>
+      </ion-item-divider>
       <ion-item-divider color="light">
           <span >{{month}}月</span>
           <ion-icon style="float:right;padding-right:8px" (click)="presentMonth()" name="ios-calendar-outline"></ion-icon>
