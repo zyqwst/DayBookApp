@@ -14,7 +14,7 @@ import { StorageService } from "./storage-service";
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://localhost:9971";
+    hostUrl:string = "http://www.hz8866.cn:9971";
     TIME_OUT:number = 30000;
     constructor(
         private http: Http,

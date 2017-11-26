@@ -8,22 +8,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-
 
 <ion-content>
+  
    <ion-list>
-        <ion-item>
-            <ion-label>日期</ion-label>
-            <ion-datetime displayFormat="MM月DD日" pickerFormat="MM DD" [(ngModel)]="credate_between"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>至</ion-label>
-            <ion-datetime displayFormat="MM月DD日" pickerFormat="MM DD" [(ngModel)]="credate_betweenand"></ion-datetime>
-        </ion-item>
+      <ion-item>
+          <ion-label>月份</ion-label>
+          <ion-datetime displayFormat="YYYY-MM" pickerFormat="YYYY-MM" [(ngModel)]="credate_yearAndMonth"  doneText="确定" cancelText="取消"></ion-datetime>
+      </ion-item>
         <ion-item>
           <ion-label>类型</ion-label>
-          <ion-select  interface="popover" [(ngModel)]="typeid_and">
+          <ion-select  interface="popover" [(ngModel)]="typeid_and" okText="确定" cancelText="取消">
             <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
           </ion-select>
         </ion-item>

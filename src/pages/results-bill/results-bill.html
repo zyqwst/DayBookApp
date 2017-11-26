@@ -4,11 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      明细
+      账单
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentMonth($event)">
-        <ion-icon name="md-calendar"></ion-icon>
+      <button ion-button icon-only (click)="queryChart($event)">
+        <ion-icon style="color:#387ef5" name="ios-pie-outline"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -22,11 +22,14 @@
       </ion-refresher-content>
     </ion-refresher>
     <ion-item-group class="list_row" >
+      <ion-item>
+          <ion-select  interface="popover" [(ngModel)]="typeid_and" okText="确定" cancelText="取消">
+            <ion-option *ngFor="let type of billTypes" value="{{type.id}}">{{type.name}}</ion-option>
+          </ion-select>
+      </ion-item>
       <ion-item-divider color="light">
           <span >{{month}}月</span>
-          <a style="float:right" (click)="queryChart()">月账单
-            <ion-icon name="ios-arrow-forward-outline"></ion-icon>
-          </a>
+          <ion-icon style="float:right;padding-right:8px" (click)="presentMonth()" name="ios-calendar-outline"></ion-icon>
       </ion-item-divider>
       
       <button ion-item padding-left *ngFor="let item of data;let i=index">

@@ -50,13 +50,11 @@ export class SearchBill {
 		
   }
   date = new Date();
-  str = this.datePipe.transform(this.date, 'yyyy-MM-dd');
-  credate_between:string = this.str;
-  credate_betweenand:string = this.str;
+  str:string = this.datePipe.transform(this.date, 'yyyy-MM');
+  credate_yearAndMonth:string = this.str;
   typeid_and:number;
   query(){
-      let params = [{key:"credate_between",value:this.credate_between},
-    {key:"credate_betweenand",value:this.credate_betweenand},
+      let params = [{key:"credate_like",value:this.credate_yearAndMonth},
      {key:"typeid_and",value:(this.typeid_and===undefined ?"":this.typeid_and+"_LONG")}];
       this.navCtrl.push(ResultsBill,{params:params});
   }

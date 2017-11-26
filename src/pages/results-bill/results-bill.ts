@@ -6,6 +6,7 @@ import { HttpService } from "../../providers/http-service";
 import { MonthPopPage } from "../month-pop-page/month-pop-page";
 import { DateUtils } from "../../utils/date-utils";
 import { IchartPage } from "../ichart-page/ichart-page";
+import { Dictionary } from '../../domain/Dictionary';
 
 @Component({
   selector: 'page-results-bill',
@@ -17,6 +18,7 @@ export class ResultsBill {
   loader ;
   month:number;
   event:any;
+  billTypes:Dictionary[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private bookService :BookService,
               private httpService :HttpService,
@@ -62,6 +64,7 @@ export class ResultsBill {
     )
   }
   presentMonth(ev){
+    console.log(ev);
     let popover = this.popoverCtrl.create(MonthPopPage);
     popover.present({ev});
     popover.onDidDismiss((data)=>{
