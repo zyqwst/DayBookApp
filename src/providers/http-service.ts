@@ -14,7 +14,7 @@ import { StorageService } from "./storage-service";
 
 @Injectable()
 export class HttpService {
-    hostUrl:string = "http://www.hz8866.cn:9971";
+    hostUrl:string = "localhost:9971";
     TIME_OUT:number = 30000;
     constructor(
         private http: Http,
@@ -117,7 +117,7 @@ export class HttpService {
     }
     public getToken():string{
         let user = this.getCurrUser(); 
-        if(user==null){this.alert('Token错误，请登录后重试');}
+        if(user==null || user.id==null || user.token==null){this.alert('Token错误，请登录后重试');}
         let token = user.id+"_"+user.token;
         return token;
     }
